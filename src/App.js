@@ -67,6 +67,28 @@ export default function App() {
     TRENT: 0
   });
   useEffect(async () => {
+    const tridentPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/other/trident"
+    );
+    const exideindPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/other/exideind"
+    );
+    const relaxoPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/other/relaxo"
+    );
+
+    const asianpaintsPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/paint/asianpaints"
+    );
+
+    const bergerpaintsPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/paint/bergerpaints"
+    );
+
+    const kansainerPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/paint/kansainer"
+    );
+
     const blackrosePrice = await axios.get(
       "https://upstoxApi.sandeepmehta215.repl.co/chemical/blackrose"
     );
@@ -211,6 +233,17 @@ export default function App() {
       "https://upstoxApi.sandeepmehta215.repl.co/fmcg/trentltd"
     );
 
+    setOTHERS({
+      TRIDENT: trentltdPrice.data.price,
+      EXIDEIND: exideindPrice.data.price,
+      RELAXO: relaxoPrice.data.price
+    });
+
+    setPAINTS({
+      ASIAN: asianpaintsPrice.data.price,
+      BERGER: bergerpaintsPrice.data.price,
+      NEROLAC: kansainerPrice.data.price
+    });
     setCHEMICAL({
       BLACKROSE: blackrosePrice.data.price,
       NAVINFLUORO: navinfluoroPrice.data.price,
@@ -307,6 +340,16 @@ export default function App() {
       <h3> SUMICHEM : {CHEMICAL.SUMICHEM} </h3>
       <h3> LUXCHEM : {CHEMICAL.LUXCHEM} </h3>
       <h3> BLACKROSE : {CHEMICAL.BLACKROSE} </h3>
+
+      <h1>PAINTS </h1>
+      <h3> ASIAN : {PAINTS.ASIAN} </h3>
+      <h3> BERGER : {PAINTS.BERGER} </h3>
+      <h3> NEROLAC : {PAINTS.NEROLAC} </h3>
+
+      <h1>OTHERS </h1>
+      <h3> RELAXO : {OTHERS.RELAXO} </h3>
+      <h3> TRIDENT : {OTHERS.TRIDENT} </h3>
+      <h3> EXIDEIND : {OTHERS.EXIDEIND} </h3>
     </div>
   );
 }
