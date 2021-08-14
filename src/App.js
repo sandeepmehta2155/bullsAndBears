@@ -3,6 +3,40 @@ import axios from "axios";
 import "./styles.css";
 
 export default function App() {
+  const [OTHERS, setOTHERS] = useState({
+    TRIDENT: 0,
+    EXIDEIND: 0,
+    RELAXO: 0
+  });
+
+  const [PAINTS, setPAINTS] = useState({
+    ASIAN: 0,
+    BERGER: 0,
+    NEROLAC: 0
+  });
+
+  const [IT, setIT] = useState({
+    INFOSYS: 0,
+    WIPRO: 0,
+    LTI: 0,
+    INDIAMART: 0,
+    NAUKRI: 0,
+    HCLTECH: 0
+  });
+
+  const [CHEMICAL, setCHEMICAL] = useState({
+    BLACKROSE: 0,
+    NAVINFLUORO: 0,
+    ALKLYAMINES: 0,
+    ATUL: 0,
+    AARTIIND: 0,
+    AARTISURF: 0,
+    LUXCHEM: 0,
+    DEEPAKNITRITE: 0,
+    MANORG: 0,
+    SUMICHEM: 0
+  });
+
   const [BANKINGANDFINANCE, setBANKINGANDFINANCE] = useState({
     HDFC: 0,
     HDFCBANK: 0,
@@ -15,6 +49,7 @@ export default function App() {
   });
 
   const [OGINDUSTRIAL, setOGINDUSTRIAL] = useState({
+    PIDILITE: 0,
     MOTHERSUMI: 0,
     PRINCEPIPES: 0,
     SONACOMS: 0,
@@ -32,6 +67,70 @@ export default function App() {
     TRENT: 0
   });
   useEffect(async () => {
+    const blackrosePrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/blackrose"
+    );
+
+    const navinfluoroPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/navinfluoro"
+    );
+
+    const atulPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/atul"
+    );
+
+    const alklyaminesPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/alklyamines"
+    );
+
+    const aartiindPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/aartiind"
+    );
+
+    const aartisurfPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/aartisurf"
+    );
+
+    const laxmichemPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/laxmichem"
+    );
+
+    const deepaknitritePrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/deepaknitrite"
+    );
+
+    const manorgPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/manorg"
+    );
+
+    const sumichemPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/chemical/sumichem"
+    );
+
+    const infosysPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/infoandtech/infosys"
+    );
+
+    const wiproPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/infoandtech/wipro"
+    );
+
+    const ltiPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/infoandtech/lti"
+    );
+
+    const indiamartPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/infoandtech/indiamart"
+    );
+
+    const hcltechPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/infoandtech/hcltech"
+    );
+
+    const naukriPrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/infoandtech/naukri"
+    );
+
     const hdfcPrice = await axios.get(
       "https://upstoxApi.sandeepmehta215.repl.co/bankingandfinance/hdfc"
     );
@@ -112,6 +211,27 @@ export default function App() {
       "https://upstoxApi.sandeepmehta215.repl.co/fmcg/trentltd"
     );
 
+    setCHEMICAL({
+      BLACKROSE: blackrosePrice.data.price,
+      NAVINFLUORO: navinfluoroPrice.data.price,
+      ATUL: atulPrice.data.price,
+      ALKLYAMINES: alklyaminesPrice.data.price,
+      AARTIIND: aartiindPrice.data.price,
+      AARTISURF: aartisurfPrice.data.price,
+      LUXCHEM: laxmichemPrice.data.price,
+      DEEPAKNITRITE: deepaknitritePrice.data.price,
+      MANORG: manorgPrice.data.price,
+      SUMICHEM: sumichemPrice.data.price
+    });
+
+    setIT({
+      INFOSYS: infosysPrice.data.price,
+      WIPRO: wiproPrice.data.price,
+      HCLTECH: hcltechPrice.data.price,
+      INDIAMART: indiamartPrice.data.price,
+      NAUKRI: naukriPrice.data.price
+    });
+
     setBANKINGANDFINANCE({
       HDFC: hdfcPrice.data.price,
       HDFCAMC: hdfcamcPrice.data.price,
@@ -168,6 +288,25 @@ export default function App() {
       <h3> FEDERALBANK : {BANKINGANDFINANCE.FEDERALBANK} </h3>
       <h3> ICICIBANK : {BANKINGANDFINANCE.ICICIBANK} </h3>
       <h3> CHOLAFIN : {BANKINGANDFINANCE.CHOLAFIN} </h3>
+
+      <h1>INFO. AND TECH. </h1>
+      <h3> INFOSYS : {IT.INFOSYS} </h3>
+      <h3> WIPRO : {IT.WIPRO} </h3>
+      <h3> HCLTECH : {IT.HCLTECH} </h3>
+      <h3> NAUKRI : {IT.NAUKRI} </h3>
+      <h3> INDIAMART : {IT.INDIAMART} </h3>
+
+      <h1>CHEMICAL </h1>
+      <h3> AARTIIND : {CHEMICAL.AARTIIND} </h3>
+      <h3> AARTISURF : {CHEMICAL.AARTISURF} </h3>
+      <h3> ALKLYAMINES : {CHEMICAL.ALKLYAMINES} </h3>
+      <h3> NAVINFLUORO : {CHEMICAL.NAVINFLUORO} </h3>
+      <h3> ATUL : {CHEMICAL.ATUL} </h3>
+      <h3> DEEPAKNITRITE : {CHEMICAL.DEEPAKNITRITE} </h3>
+      <h3> MANORG : {CHEMICAL.MANORG} </h3>
+      <h3> SUMICHEM : {CHEMICAL.SUMICHEM} </h3>
+      <h3> LUXCHEM : {CHEMICAL.LUXCHEM} </h3>
+      <h3> BLACKROSE : {CHEMICAL.BLACKROSE} </h3>
     </div>
   );
 }
