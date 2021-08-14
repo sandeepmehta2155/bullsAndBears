@@ -1,4 +1,15 @@
 .App {
   font-family: sans-serif;
+  /* text-align: center; */
+}
+table,
+th,
+td {
+  border: 1px solid black;
   text-align: center;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
 }

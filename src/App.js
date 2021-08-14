@@ -9,10 +9,22 @@ export default function App() {
     RELAXO: 0
   });
 
+  const [OTHERSPL, setOTHERSPL] = useState({
+    TRIDENT_PL: 0,
+    EXIDEIND_PL: 0,
+    RELAXO_PL: 0
+  });
+
   const [PAINTS, setPAINTS] = useState({
     ASIAN: 0,
     BERGER: 0,
     NEROLAC: 0
+  });
+
+  const [PAINTSPL, setPAINTSPL] = useState({
+    ASIAN_PL: 0,
+    BERGER_PL: 0,
+    NEROLAC_PL: 0
   });
 
   const [IT, setIT] = useState({
@@ -22,6 +34,15 @@ export default function App() {
     INDIAMART: 0,
     NAUKRI: 0,
     HCLTECH: 0
+  });
+
+  const [ITPL, setITPL] = useState({
+    INFOSYS_PL: 0,
+    WIPRO_PL: 0,
+    LTI_PL: 0,
+    INDIAMART_PL: 0,
+    NAUKRI_PL: 0,
+    HCLTECH_PL: 0
   });
 
   const [CHEMICAL, setCHEMICAL] = useState({
@@ -37,6 +58,18 @@ export default function App() {
     SUMICHEM: 0
   });
 
+  const [CHEMICALPL, setCHEMICALPL] = useState({
+    BLACKROSE_PL: 0,
+    NAVINFLUORO_PL: 0,
+    ALKLYAMINES_PL: 0,
+    ATUL_PL: 0,
+    AARTIIND_PL: 0,
+    AARTISURF_PL: 0,
+    LUXCHEM_PL: 0,
+    DEEPAKNITRITE_PL: 0,
+    MANORG_PL: 0,
+    SUMICHEM_PL: 0
+  });
   const [BANKINGANDFINANCE, setBANKINGANDFINANCE] = useState({
     HDFC: 0,
     HDFCBANK: 0,
@@ -46,6 +79,17 @@ export default function App() {
     ICICIBANK: 0,
     FEDERALBANK: 0,
     CHOLAFIN: 0
+  });
+
+  const [BANKINGANDFINANCEPL, setBANKINGANDFINANCEPL] = useState({
+    HDFC_PL: 0,
+    HDFCBANK_PL: 0,
+    HDFCAMC_PL: 0,
+    BAJAJFINANCE_PL: 0,
+    MUTHOOT_PL: 0,
+    ICICIBANK_PL: 0,
+    FEDERALBANK_PL: 0,
+    CHOLAFIN_PL: 0
   });
 
   const [OGINDUSTRIAL, setOGINDUSTRIAL] = useState({
@@ -60,12 +104,32 @@ export default function App() {
     IGL: 0
   });
 
+  const [OGINDUSTRIALPL, setOGINDUSTRIALPL] = useState({
+    PIDILITE_PL: 0,
+    MOTHERSUMI_PL: 0,
+    PRINCEPIPES_PL: 0,
+    SONACOMS_PL: 0,
+    TATAMOTORS_PL: 0,
+    LT_PL: 0,
+    RVNL_PL: 0,
+    ASTRAL_PL: 0,
+    IGL_PL: 0
+  });
+
   const [FMCG, setFMCG] = useState({
     VBL: 0,
     MARICO: 0,
     TATACONSUMER: 0,
     TRENT: 0
   });
+
+  const [FMCGPL, setFMCGPL] = useState({
+    VBL_PL: 0,
+    MARICO_PL: 0,
+    TATACONSUMER_PL: 0,
+    TRENT_PL: 0
+  });
+
   useEffect(async () => {
     const tridentPrice = await axios.get(
       "https://upstoxApi.sandeepmehta215.repl.co/other/trident"
@@ -201,6 +265,10 @@ export default function App() {
       "https://upstoxApi.sandeepmehta215.repl.co/ogindustrial/tatamotors"
     );
 
+    const pidilitePrice = await axios.get(
+      "https://upstoxApi.sandeepmehta215.repl.co/ogindustrial/pidilite"
+    );
+
     const ltPrice = await axios.get(
       "https://upstoxApi.sandeepmehta215.repl.co/ogindustrial/lt"
     );
@@ -234,7 +302,7 @@ export default function App() {
     );
 
     setOTHERS({
-      TRIDENT: trentltdPrice.data.price,
+      TRIDENT: tridentPrice.data.price,
       EXIDEIND: exideindPrice.data.price,
       RELAXO: relaxoPrice.data.price
     });
@@ -262,7 +330,8 @@ export default function App() {
       WIPRO: wiproPrice.data.price,
       HCLTECH: hcltechPrice.data.price,
       INDIAMART: indiamartPrice.data.price,
-      NAUKRI: naukriPrice.data.price
+      NAUKRI: naukriPrice.data.price,
+      LTI: ltiPrice.data.price
     });
 
     setBANKINGANDFINANCE({
@@ -291,65 +360,637 @@ export default function App() {
       LT: ltPrice.data.price,
       ASTRAL: astralPrice.data.price,
       IGL: iglPrice.data.price,
-      RVNL: rvnlPrice.data.price
+      RVNL: rvnlPrice.data.price,
+      PIDILITE: pidilitePrice.data.price
     });
   }, []);
   return (
     <div className="App">
-      <h1>FMCG</h1>
-      <h3> VBL : {FMCG.VBL} </h3>
-      <h3> MARICO : {FMCG.MARICO} </h3>
-      <h3> TATA-CONSUMER : {FMCG.TATACONSUMER} </h3>
-      <h3> TRENT-Ltd : {FMCG.TRENT} </h3>
+      <table>
+        <tr>
+          <th> STOCK </th>
+          <th> LTP </th>
+          <th> BUYING-PRICE </th>
+          <th> BUYING-QTYs </th>
+          <th> P&L </th>
+        </tr>
+        <tr>
+          {" "}
+          <h2>FMCG</h2>
+        </tr>
+        <tr>
+          <td>
+            <h4>VBL</h4>
+          </td>
+          <td>{FMCG.VBL}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
 
-      <h1>O&G / INDUSTRIAL</h1>
-      <h3> MOTHERSUMI : {OGINDUSTRIAL.MOTHERSUMI} </h3>
-      <h3> PRINCEPIPES : {OGINDUSTRIAL.PRINCEPIPES} </h3>
-      <h3> SONACOMS : {OGINDUSTRIAL.SONACOMS} </h3>
-      <h3> LT : {OGINDUSTRIAL.LT} </h3>
-      <h3> TATAMOTORS : {OGINDUSTRIAL.TATAMOTORS} </h3>
-      <h3> ASTRAL : {OGINDUSTRIAL.ASTRAL} </h3>
-      <h3> IGL : {OGINDUSTRIAL.IGL} </h3>
-      <h3> RVNL : {OGINDUSTRIAL.RVNL} </h3>
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{FMCGPL.VBL_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>MARICO</h4>
+          </td>
+          <td>{FMCG.MARICO}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
 
-      <h1>BANKING AND FINANCE </h1>
-      <h3> HDFC : {BANKINGANDFINANCE.HDFC} </h3>
-      <h3> HDFCAMC : {BANKINGANDFINANCE.HDFCAMC} </h3>
-      <h3> HDFCBANK : {BANKINGANDFINANCE.HDFCBANK} </h3>
-      <h3> BAJAJFINANCE : {BANKINGANDFINANCE.BAJAJFINANCE} </h3>
-      <h3> MUTHOOT : {BANKINGANDFINANCE.MUTHOOT} </h3>
-      <h3> FEDERALBANK : {BANKINGANDFINANCE.FEDERALBANK} </h3>
-      <h3> ICICIBANK : {BANKINGANDFINANCE.ICICIBANK} </h3>
-      <h3> CHOLAFIN : {BANKINGANDFINANCE.CHOLAFIN} </h3>
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{FMCGPL.MARICO_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>TATA-CONSUMER</h4>
+          </td>
+          <td>{FMCG.TATACONSUMER}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
 
-      <h1>INFO. AND TECH. </h1>
-      <h3> INFOSYS : {IT.INFOSYS} </h3>
-      <h3> WIPRO : {IT.WIPRO} </h3>
-      <h3> HCLTECH : {IT.HCLTECH} </h3>
-      <h3> NAUKRI : {IT.NAUKRI} </h3>
-      <h3> INDIAMART : {IT.INDIAMART} </h3>
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{FMCGPL.TATACONSUMER_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>TRENT</h4>
+          </td>
+          <td>{FMCG.TRENT}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
 
-      <h1>CHEMICAL </h1>
-      <h3> AARTIIND : {CHEMICAL.AARTIIND} </h3>
-      <h3> AARTISURF : {CHEMICAL.AARTISURF} </h3>
-      <h3> ALKLYAMINES : {CHEMICAL.ALKLYAMINES} </h3>
-      <h3> NAVINFLUORO : {CHEMICAL.NAVINFLUORO} </h3>
-      <h3> ATUL : {CHEMICAL.ATUL} </h3>
-      <h3> DEEPAKNITRITE : {CHEMICAL.DEEPAKNITRITE} </h3>
-      <h3> MANORG : {CHEMICAL.MANORG} </h3>
-      <h3> SUMICHEM : {CHEMICAL.SUMICHEM} </h3>
-      <h3> LUXCHEM : {CHEMICAL.LUXCHEM} </h3>
-      <h3> BLACKROSE : {CHEMICAL.BLACKROSE} </h3>
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{FMCGPL.TRENT_PL}</td>
+        </tr>
+        {/* ----------------------------------  ------------------- */}
+        <tr>
+          {" "}
+          <h2>O&G / INDUSTRIAL</h2>
+        </tr>
+        <tr>
+          <td>
+            <h4>MOTHERSUMI</h4>
+          </td>
+          <td>{OGINDUSTRIAL.MOTHERSUMI}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
 
-      <h1>PAINTS </h1>
-      <h3> ASIAN : {PAINTS.ASIAN} </h3>
-      <h3> BERGER : {PAINTS.BERGER} </h3>
-      <h3> NEROLAC : {PAINTS.NEROLAC} </h3>
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.MOTHERSUMI_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>PRINCEPIPES</h4>
+          </td>
+          <td>{OGINDUSTRIAL.PRINCEPIPES}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
 
-      <h1>OTHERS </h1>
-      <h3> RELAXO : {OTHERS.RELAXO} </h3>
-      <h3> TRIDENT : {OTHERS.TRIDENT} </h3>
-      <h3> EXIDEIND : {OTHERS.EXIDEIND} </h3>
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.PRINCEPIPES_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>SONACOMS</h4>
+          </td>
+          <td>{OGINDUSTRIAL.SONACOMS}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.SONACOMS_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>LT</h4>
+          </td>
+          <td>{OGINDUSTRIAL.LT}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.LT_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>TATA-MOTORS</h4>
+          </td>
+          <td>{OGINDUSTRIAL.TATAMOTORS}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.TATAMOTORS_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>ASTRAL</h4>
+          </td>
+          <td>{OGINDUSTRIAL.ASTRAL}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.ASTRAL_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>IGL</h4>
+          </td>
+          <td>{OGINDUSTRIAL.IGL}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.IGL_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>RVNL</h4>
+          </td>
+          <td>{OGINDUSTRIAL.RVNL}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OGINDUSTRIALPL.RVNL_PL}</td>
+        </tr>{" "}
+        {/* ------------------------------------------------------ */}
+        <tr>
+          {" "}
+          <h2>BANKING AND FINANCE</h2>{" "}
+        </tr>
+        <tr>
+          <td>
+            <h4>HDFC</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.HDFC}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.HDFC_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>HDFC-BANK</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.HDFCBANK}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.HDFCBANK_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>HDFC-AMC</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.HDFCAMC}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.HDFCAMC_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>BAJAJFINANCE</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.BAJAJFINANCE}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.BAJAJFINANCE_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>MUTHOOT</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.MUTHOOT}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.MUTHOOT_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>FEDERALBANK</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.FEDERALBANK}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.FEDERALBANK_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>ICICIBANK</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.ICICIBANK}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.ICICIBANK_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>CHOLAFIN</h4>
+          </td>
+          <td>{BANKINGANDFINANCE.CHOLAFIN}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{BANKINGANDFINANCEPL.CHOLAFIN_PL}</td>
+        </tr>
+        {/* ------------------------------------------------------- */}
+        <tr>
+          {" "}
+          <h2>INFO. AND TECH. </h2>
+        </tr>
+        <tr>
+          <td>
+            <h4>INFOSYS</h4>
+          </td>
+          <td>{IT.INFOSYS}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{ITPL.INFOSYS_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>WIPRO</h4>
+          </td>
+          <td>{IT.WIPRO}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{ITPL.WIPRO_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>HCLTECH</h4>
+          </td>
+          <td>{IT.HCLTECH}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{ITPL.HCLTECH_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>NAUKRI</h4>
+          </td>
+          <td>{IT.NAUKRI}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{ITPL.NAUKRI_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>INDIAMART</h4>
+          </td>
+          <td>{IT.INDIAMART}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{ITPL.INDIAMART_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>LTI</h4>
+          </td>
+          <td>{IT.LTI}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{ITPL.LTI_PL}</td>
+        </tr>
+        <tr>
+          <h2>CHEMICAL </h2>
+        </tr>
+        <tr>
+          <td>
+            <h4>AARTIIND</h4>
+          </td>
+          <td>{CHEMICAL.AARTIIND}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.AARTIIND_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>AARTISURF</h4>
+          </td>
+          <td>{CHEMICAL.AARTISURF}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.AARTISURF_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>ALKLYAMINES</h4>
+          </td>
+          <td>{CHEMICAL.ALKLYAMINES}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.ALKLYAMINES_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>ATUL</h4>
+          </td>
+          <td>{CHEMICAL.ATUL}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.ATUL_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>NAVINFLUORO</h4>
+          </td>
+          <td>{CHEMICAL.NAVINFLUORO}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.NAVINFLUORO_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>DEEPAKNITRITE</h4>
+          </td>
+          <td>{CHEMICAL.DEEPAKNITRITE}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.DEEPAKNITRITE_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>MANORG</h4>
+          </td>
+          <td>{CHEMICAL.MANORG}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.MANORG_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>SUMICHEM</h4>
+          </td>
+          <td>{CHEMICAL.SUMICHEM}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.SUMICHEM_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>LUXCHEM</h4>
+          </td>
+          <td>{CHEMICAL.LUXCHEM}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.LUXCHEM_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>BLACKROSE</h4>
+          </td>
+          <td>{CHEMICAL.BLACKROSE}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{CHEMICALPL.BLACKROSE_PL}</td>
+        </tr>
+        <tr>
+          <h2>PAINTS </h2>
+        </tr>
+        <tr>
+          <td>
+            <h4>ASIAN</h4>
+          </td>
+          <td>{PAINTS.ASIAN}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{PAINTSPL.ASIAN_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>BERGER</h4>
+          </td>
+          <td>{PAINTS.BERGER}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{PAINTSPL.BERGER_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>NEROLAC</h4>
+          </td>
+          <td>{PAINTS.NEROLAC}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{PAINTSPL.NEROLAC_PL}</td>
+        </tr>
+        <tr>
+          <h2>OTHERS</h2>
+        </tr>
+        <tr>
+          <td>
+            <h4>RELAXO</h4>
+          </td>
+          <td>{OTHERS.RELAXO}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OTHERSPL.RELAXO_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>TRIDENT</h4>
+          </td>
+          <td>{OTHERS.TRIDENT}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OTHERSPL.TRIDENT_PL}</td>
+        </tr>
+        <tr>
+          <td>
+            <h4>EXIDEIND</h4>
+          </td>
+          <td>{OTHERS.EXIDEIND}</td>
+          <td>
+            <input placeholder="buying price" />
+          </td>
+
+          <td>
+            <input placeholder="quantity" />
+          </td>
+          <td>{OTHERSPL.EXIDEIND_PL}</td>
+        </tr>
+      </table>
     </div>
   );
 }
